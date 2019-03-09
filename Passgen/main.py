@@ -1,8 +1,10 @@
 #coding:utf-8
 from tkinter import *
-from tkinter.messagebox import *
+from tkinter import messagebox
+from tkinter.messagebox import showwarning
 from passgen import generate_password
 import passgen
+
 
 app = Tk()
 #app.geometry("500x400+400+400")
@@ -12,9 +14,6 @@ app.title("PassGen")
 #color_main = "#%02x%02x%02x" % (88, 98, 211)
 color_menu = "#%02x%02x%02x" % (42, 62, 211)
 
-#app.grid_rowconfigure(0, weight=6)
-#app.grid_columnconfigure(0, weight=6)
-#app.configure(bg=color_main)
 
 
 def leave():
@@ -38,11 +37,16 @@ def generation():
         for passwords in passwords_list:
             affiche_pass.insert(INSERT, '{}\n'.format(passwords))
 
-
 def cleartext():
     passwords_list = passgen.passwords
     passwords_list[:] = passwords_list = []
     affiche_pass.delete(1.0, END)
+
+def export_txt():
+    messagebox.showwarning("Info", "Move the file pass.txt before the next export\nfile is in app directory")
+    with open("pass.txt", "w") as f:
+            data = str(affiche_pass.get("1.0",END))
+            f.write(data)
 
 
 value_nbr = IntVar
@@ -52,8 +56,8 @@ pass_all = StringVar
 ###### MENU BAR ######
 menubar = Menu(app, tearoff=0)
 menu1 = Menu(menubar, tearoff=0)
-menu1.add_command(label='New')
-menu1.add_command(label='Edit')
+menu1.add_command(label='New', command=cleartext)
+menu1.add_command(label='Export', command=export_txt)
 menu1.add_separator()
 menu1.add_command(label='Quit', command=app.quit())
 menubar.add_cascade(label='File', menu=menu1)
@@ -62,12 +66,12 @@ app.config(menu=menubar)
 
 label_nbrPass = Label(app, text="Number Of Password :")
 label_nbrPass.grid(column=1, row=1)
-number_password = Entry(app, textvariable=value_nbr, width=30)
+number_password = Spinbox(app, textvariable=value_nbr, width=30, from_=1, to=100)
 
 
 label_lenPass = Label(app, text="Length Of Password :")
 label_lenPass.grid(column=1, row=3)
-password_len = Entry(app, textvariable=value_len, width=30)
+password_len = Spinbox(app, textvariable=value_len, width=30, from_=1, to=100)
 
 
 bouton_gen = Button(app, text="Generate", command=generation)
