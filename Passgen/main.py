@@ -7,7 +7,7 @@ import passgen
 app = Tk()
 #app.geometry("500x400+400+400")
 app.resizable(width=False, height=False)
-app.title("Apps Launcher")
+app.title("PassGen")
 
 #color_main = "#%02x%02x%02x" % (88, 98, 211)
 color_menu = "#%02x%02x%02x" % (42, 62, 211)
