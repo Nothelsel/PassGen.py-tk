@@ -1,7 +1,7 @@
 #coding:utf-8
 from tkinter import *
 from tkinter import messagebox
-from tkinter.messagebox import showwarning
+from tkinter.messagebox import *
 from passgen import generate_password
 import passgen
 
@@ -59,7 +59,7 @@ menu1 = Menu(menubar, tearoff=0)
 menu1.add_command(label='New', command=cleartext)
 menu1.add_command(label='Export', command=export_txt)
 menu1.add_separator()
-menu1.add_command(label='Quit', command=app.quit())
+menu1.add_command(label='Quit', command=app.quit)
 menubar.add_cascade(label='File', menu=menu1)
 app.config(menu=menubar)
 ########################
