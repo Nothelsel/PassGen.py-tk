@@ -23,12 +23,20 @@ def leave():
 
 
 def generation():
+    passwords_list = passgen.passwords
     nbr_pass = int(number_password.get())
     len_pass = int(password_len.get())
-    generate_password(nbr_pass, len_pass)
-    passwords_list = passgen.passwords
-    for passwords in passwords_list:
-        affiche_pass.insert(INSERT, '{}\n'.format(passwords))
+    if len(passwords_list) != 0:
+        passwords_list[:] = passwords_list = []
+        generate_password(nbr_pass, len_pass)
+        passwords_list = passgen.passwords
+        for passwords in passwords_list:
+            affiche_pass.insert(INSERT, '{}\n'.format(passwords))
+    else:
+        generate_password(nbr_pass, len_pass)
+        passwords_list = passgen.passwords
+        for passwords in passwords_list:
+            affiche_pass.insert(INSERT, '{}\n'.format(passwords))
 
 
 def cleartext():
