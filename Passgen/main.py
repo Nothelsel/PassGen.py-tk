@@ -32,6 +32,8 @@ def generation():
 
 
 def cleartext():
+    passwords_list = passgen.passwords
+    passwords_list[:] = passwords_list = []
     affiche_pass.delete(1.0, END)
 
 
